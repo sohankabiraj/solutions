@@ -84,6 +84,7 @@ public class Solution
 		/*
 		 * Multidimensional ArrayList 
 		 */
+		/*
 		int k = 0;
 		ArrayList<ArrayList<String>> rows = new ArrayList<>();
 		for(int i=0; i<5; i++){
@@ -102,10 +103,86 @@ public class Solution
 			 }
 			 System.out.println("");
 		}
+		*/
+		
+		/*
+			LOGIC: 
+			- create hashmap key: character, value(arraylist-integer): index found at, number of times found here
+			- if character is found in hashmap key and value of index at is the same as the loop iteration then update number of times found ++
+				- OR add character to string
+					- in order for character to be added to string it must be found at the same index more than once 
+					- maybe just compare character with hashmap(character, index found at) and if found add to string 
+						- but what if another character at the same index if more frequently found? 
+							- need to keep count and have condition to compare 
+			- else set 
+		*/
+		
+		Map<Character, Integer> charVals = new HashMap<Character, Integer>(); 
+		int i = 0;
+		String commonPrefix = ""; 
+		List<String> allCommonPrefix = new ArrayList<String>(); 
 		
 		
+		while(i < arrItems.length){
+			//int index = 0; 
+			int total = 1; 
+			Character letter = null;  
+			System.out.println("i: " + i);
+			System.out.println("checking for " + arrItems[i]);
+			//first figure out how to set hashmap with proper values including exception of if already in map then just sum++
+			for (int j = 0; j < arrItems[i].length(); j++){ //through each character in each item in array 
+				System.out.println("j: " + j);
+				letter = arrItems[i].charAt(j); //getting character from item in array 
+				System.out.println("char at index " + j + " is " + letter); 
+				//need logic for checking and adding: letter, index found at, total number of times found at this index 
+				//then need logic for if
+				if (charVals.containsKey(letter) && charVals.get(letter) == j) {
+					//StringBuilder commonFound = new StringBuilder(); 
+					//commonFound.append(letter); 
+					//total += 1; 
+					//System.out.println("commonFound: " + commonFound.toString()); 
+					System.out.println("yes: " + letter); 
+					commonPrefix += letter.toString();
+					System.out.println("commonPrefix: " + commonPrefix); 
+					
+				}
+				else {
+					charVals.put(letter, j); 
+				}
+			}
+			System.out.println("charVals: " + charVals); 
+			allCommonPrefix.add(commonPrefix); 
+			commonPrefix = ""; 
+			//System.out.println(commonPrefix); 
+			
+			//System.out.println("commonFound: " + commonFound.toString());
+			i++;
+		}
 		
+		System.out.println("allCommonPrefix: " + allCommonPrefix.toString()); 
+		String longestCommonPrefix = ""; 
 		
+		for (int k = 0; k < allCommonPrefix.size(); k++){
+			if (allCommonPrefix.get(k) == ""){
+				longestCommonPrefix += ""; 
+			}
+			else {
+				
+				longestCommonPrefix += allCommonPrefix.get(k).toString(); 
+				// longestCommonPrefix += ;
+			}
+			System.out.println(longestCommonPrefix);
+		}
+		
+		//String[] commonPrefixArr = allCommonPrefix.toArray(new String[allCommonPrefix.size()]);
+		//System.out.println("commonPrefixArr: " + Arrays.toString(commonPrefixArr)); 
+		
+		//findingCommonPrefix(commonPrefixArr); 
+		
+		// MAYBE INSTEAD NEED TO ADD UP NUMBER OF TIMES EACH LETTER SHOWS UP AT EACH INDEX AND ADD EACH CHARACTER GIVEN THE VALUES TO A STRING 
+			// - as long as a letter shows up more than once, it should be added 
+				// - do not add a letter if it shows up more 
+		//findingCommonPrefix(); 
 		// Map<String, ArrayList<Character, Integer>> charVals = new HashMap<Character, ArrayList<Character, Integer>>();
 
 		// while (i < arrItems.length){ //through each item in array 
